@@ -52,12 +52,13 @@ file { "/var/etc/darkice/":
 
 file { "/var/etc/darkice/darkice.cfg":
   content => template("/etc/puppet/templates/darkice.cfg"),
-  notify => Service[darkice],
+  notify => Exec[darkice-restart],
   tag => boot
 }
 
-service { darkice:
-  ensure => running
+exec { darkice-restart:
+  command => "pkill -f /usr/bin/darkice",
+  refreshonly => true
 }
 
 file { "/var/etc/resolv.conf":
