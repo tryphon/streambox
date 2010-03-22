@@ -71,3 +71,8 @@ file { "/var/log":
   source => "/var/log.model",
   tag => boot
 }
+
+exec { "amixerconf":
+  command => "/usr/local/bin/amixerconf",
+  tag => boot
+}
