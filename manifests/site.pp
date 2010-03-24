@@ -29,7 +29,7 @@ include alsa::common
 include alsa::oss # troubles with alsa & darkice 
 
 $darkice_user = "stream"
-include darkice
+include darkice::full
 include apache
 include apache::dnssd
 include streamcontrol
