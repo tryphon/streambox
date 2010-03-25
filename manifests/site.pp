@@ -27,6 +27,7 @@ include sudo
 
 include alsa::common
 include alsa::oss # troubles with alsa & darkice 
+include tuner
 
 $darkice_user = "stream"
 include darkice::full
