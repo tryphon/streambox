@@ -1,6 +1,4 @@
 class darkice::common {
-  package { darkice: }
-
   file { "/etc/darkice/darkice.cfg":
     ensure => "/var/etc/darkice/darkice.cfg"
   }
@@ -34,7 +32,10 @@ class darkice::common {
 class darkice::full {
   include darkice::common
   include apt::multimedia
-  package { darkice-full: require => Apt::Source[debian-multimedia] }
+  package { darkice-full: 
+    alias => darkice,
+    require => Apt::Source[debian-multimedia] 
+  }
 }
 
 class darkice {
