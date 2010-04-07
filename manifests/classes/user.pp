@@ -1,6 +1,7 @@
 class users { 
   user { stream:
-    groups => [audio]
+    groups => [audio, www-data]
+    # www-data: to insert Events in the StreamControl db
   }
 }
 
