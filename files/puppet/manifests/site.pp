@@ -35,11 +35,12 @@ exec { "restart-networking":
 file { "/var/lib/streamcontrol/db":
   ensure => directory,
   owner => www-data,
+  group => www-data,
   tag => boot
 }
 
 exec { "create-streamcontrol-db": 
-  command => "cp /usr/share/streamcontrol/db/production.sqlite3 /var/lib/streamcontrol/db && chown www-data /var/lib/streamcontrol/db/production.sqlite3",
+  command => "install --owner=www-data --group=www-data --mode=664 /usr/share/streamcontrol/db/production.sqlite3 /var/lib/streamcontrol/db",
   creates => "/var/lib/streamcontrol/db/production.sqlite3",
   require => File["/var/lib/streamcontrol/db"],
   tag => boot
@@ -52,18 +53,12 @@ file { "/var/etc/darkice/":
 
 file { "/var/etc/darkice/darkice.cfg":
   content => template("/etc/puppet/templates/darkice.cfg"),
-  notify => Exec[darkice-restart],
+  notify => Service[darkice],
   tag => boot
 }
 
-exec { darkice-restart:
-  command => "pkill -f /usr/bin/darkice",
-  refreshonly => true
-}
-
-file { "/var/etc/resolv.conf":
-  ensure => present,
-  tag => boot
+service { darkice:
+  ensure => running
 }
 
 file { "/var/log":
