@@ -2,3 +2,4 @@ dist
 build
 *~
 local.rb
+puppet.log
