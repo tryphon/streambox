@@ -17,7 +17,14 @@ end
 
 tap_device = TapDevice.new("tap0").create
 
-network_options="-net nic,vlan=0 -net tap,ifname=#{tap_device},script=config/qemu-ifup,downscript=config/qemu-ifdown"
+network_mode="nat"
+
+tap_options = []
+tap_options << "ifname=#{tap_device}"
+tap_options << "script=config/qemu-ifup-#{network_mode}" if File.exists? "config/qemu-ifup-#{network_mode}"
+tap_options << "downscript=config/qemu-ifdown" if File.exists? "config/qemu-ifdown-#{network_mode}"
+
+network_options="-net nic,vlan=0 -net tap,#{tap_options.join(',')}"
 
 qemu_command = "qemu -enable-kvm -m 128m -drive file=dist/disk,if=ide,index=0,media=disk -soundhw ac97 #{network_options}"
 
