@@ -26,7 +26,8 @@ tap_options << "downscript=config/qemu-ifdown" if File.exists? "config/qemu-ifdo
 
 network_options="-net nic,vlan=0 -net tap,#{tap_options.join(',')}"
 
-qemu_command = "qemu -enable-kvm -m 128m -drive file=dist/disk,if=ide,index=0,media=disk -soundhw ac97 #{network_options}"
+ENV['QEMU_AUDIO_DRV']='oss'
+qemu_command = "qemu -enable-kvm -m 256m -drive file=dist/disk,if=ide,index=0,media=disk -soundhw ac97 #{network_options}"
 
 puts "Run #{qemu_command}"
 system qemu_command
