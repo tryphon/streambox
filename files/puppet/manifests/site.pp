@@ -58,7 +58,8 @@ file { "/var/etc/darkice/darkice.cfg":
 }
 
 service { darkice:
-  ensure => running
+  ensure => running,
+  hasrestart => true
 }
 
 file { "/var/log":
