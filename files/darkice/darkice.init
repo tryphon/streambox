@@ -99,18 +99,15 @@ running() {
 start_server() {
 # Start the process using the wrapper
         start-stop-daemon --start --quiet --pidfile $PIDFILE \
-            --background --chuid $USER:$GROUP --make-pidfile --exec $DAEMON -- $DAEMON_OPTS
+            --background --chuid $USER:$GROUP --exec $DAEMON -- $DAEMON_OPTS
         errcode=$?
 	return $errcode
 }
 
 stop_server() {
-# Stop the process using the wrapper
-        start-stop-daemon --stop --quiet --pidfile $PIDFILE \
-            # --exec $DAEMON
-        errcode=$?
-  # Delete pidfile
-  [ $errcode == 0 ] && rm $PIDFILE
+  # Stop the process using the wrapper
+  start-stop-daemon --stop --quiet --pidfile $PIDFILE 
+  errcode=$?
 	return $errcode
 }
 
@@ -132,7 +129,6 @@ force_stop() {
 	fi
 	rm -f $PIDFILE
 }
-
 
 case "$1" in
   start)
@@ -184,6 +180,7 @@ case "$1" in
         # Wait some sensible amount, some server need this
         [ -n "$DIETIME" ] && sleep $DIETIME
         start_server
+        sleep 3
         running
         log_end_msg $?
 	;;
