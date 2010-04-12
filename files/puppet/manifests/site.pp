@@ -78,14 +78,38 @@ service { darkice:
   hasrestart => true
 }
 
-file { "/var/log":
-  ensure => directory,
-  recurse => true,
-  source => "/var/log.model",
+exec { "copy-var-model":
+  creates => "/var/log/dmesg",
+  command => "cp -a /var/log.model/* /var/log/",
   tag => boot
 }
 
 exec { "amixerconf":
   command => "/usr/local/bin/amixerconf",
   tag => boot
+}
+
+file { "/etc/munin/plugins/cpu":
+  ensure => "/usr/share/munin/plugins/cpu",
+  notify => Service["munin-node"],
+  tag => boot
+}
+
+file { "/etc/munin/plugins/if_eth0":
+  ensure => "/usr/share/munin/plugins/if_",
+  notify => Service["munin-node"],
+  tag => boot
+}
+
+if $stream_1_server != '' {
+  file { "/etc/munin/plugins/ping_$stream_1_server":
+    ensure => "/usr/share/munin/plugins/ping_",
+    notify => Service["munin-node"],
+    tag => boot
+  }
+}
+
+service { "munin-node":
+  ensure => running,
+  hasrestart => true
 }

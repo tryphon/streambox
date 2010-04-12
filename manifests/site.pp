@@ -34,3 +34,6 @@ include darkice::full
 include apache
 include apache::dnssd
 include streamcontrol
+
+include munin::readonly
+include munin-node::local
