@@ -39,4 +39,11 @@ task :clean do
   mkdir_p "dist"
 end
 
-task :buildbot => [:clean, "streambox:dist"]
+namespace :buildbot do
+  task :dist do
+    mkdir_p target_directory = "#{ENV['HOME']}/dist/streambox"
+    cp "dist/disk", "#{target_directory}/disk-#{Time.now.strftime("%Y%m%d-%H%M")}"
+  end
+end
+
+task :buildbot => [:clean, "streambox:dist", "buildbot:dist"]
