@@ -5,13 +5,21 @@ require 'system_builder/task'
 
 load './local.rb' if File.exists?("./local.rb")
 
+boot = SystemBuilder::DebianBoot.new("build/root")
+boot.configurators << SystemBuilder::PuppetConfigurator.new
+
 SystemBuilder::Task.new(:streambox) do
   SystemBuilder::DiskSquashfsImage.new("dist/disk").tap do |image|
-    image.boot = SystemBuilder::DebianBoot.new("build/root")
-    image.boot.configurators << SystemBuilder::PuppetConfigurator.new
+    image.boot = boot
 		image.size = 200.megabytes
   end
 end
+
+# SystemBuilder::Task.new(:"streambox-demo") do
+#   SystemBuilder::IsoSquashfsImage.new("dist/iso").tap do |image|
+#     image.boot = boot
+#   end
+# end
 
 desc "Setup your environment to build a streambox image"
 task :setup => "streambox:setup" do
@@ -24,3 +32,10 @@ task :setup => "streambox:setup" do
     end
   end
 end
+
+task :clean do
+  sh "sudo sh -c \"fuser $PWD/build/root || rm -r build/root\"" if File.exists?("build/root")
+  rm_f "dist/disk dist/iso"
+end
+
+task :buildbot => [:clean, "streambox:dist"]
