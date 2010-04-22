@@ -29,4 +29,6 @@ config.after_initialize do
   
   # SavePoint.timestamp_file = "/boot/config.pp"
   SavePoint.save_command = "sudo /usr/local/sbin/save-puppet-config"
+
+  Monitoring.munin_resources_directory = "/var/www/munin/local/"
 end
