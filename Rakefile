@@ -5,13 +5,16 @@ require 'system_builder/task'
 
 load './local.rb' if File.exists?("./local.rb")
 
+release_number = Time.now.strftime('%Y%m%d-%H%M')
+release_name = "streambox-#{release_number}"
+
 boot = SystemBuilder::DebianBoot.new("build/root")
-boot.configurators << SystemBuilder::PuppetConfigurator.new
+boot.configurators << SystemBuilder::PuppetConfigurator.new(:release_name => release_name)
 
 SystemBuilder::Task.new(:streambox) do
   SystemBuilder::DiskSquashfsImage.new("dist/disk").tap do |image|
     image.boot = boot
-		image.size = 200.megabytes
+		image.size = 500.megabytes
   end
 end
 
@@ -47,3 +50,21 @@ namespace :buildbot do
 end
 
 task :buildbot => [:clean, "streambox:dist", "buildbot:dist"]
+
+task :dist do
+  rm_rf "dist/upgrade"
+  mkdir_p "dist/upgrade"
+  cp "build/filesystem.squashfs", "dist/upgrade/filesystem-#{release_name}.squashfs"
+  cp "build/root/vmlinuz", "dist/upgrade/vmlinuz-#{release_name}"
+  cp "build/root/initrd.img", "dist/upgrade/initrd-#{release_name}.img"
+  sh "tar -cf dist/#{release_name}.tar -C dist/upgrade ."
+
+  checksum = %x{sha256sum dist/#{release_name}.tar}.split.first
+  File.open("dist/latest.yml", "w") do |f|
+    f.puts "name: #{release_name}"
+    f.puts "url: http://download.tryphon.eu/streambox/updates/#{release_name}.tar"
+    f.puts "checksum: #{checksum}"
+    f.puts "status_updated_at: #{Time.now}"
+    f.puts "description_url: http://www.tryphon.eu/blog/#{release_name}"
+  end
+end
