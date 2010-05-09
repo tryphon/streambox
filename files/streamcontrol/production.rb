@@ -31,4 +31,8 @@ config.after_initialize do
   SavePoint.save_command = "sudo /usr/local/sbin/save-puppet-config"
 
   Monitoring.munin_resources_directory = "/var/www/munin/local/"
+
+  Release.latest_url = "http://download.tryphon.eu/streambox/updates/latest.yml"
+  Release.current_url = "/boot/current.yml"
+  Release.install_command = "sudo /usr/local/sbin/box-upgrade"
 end

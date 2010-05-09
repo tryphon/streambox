@@ -17,4 +17,10 @@ class streamcontrol {
   # Not used for the moment
   readonly::mount_tmpfs { "/var/lib/streamcontrol": }
 
+  # Required for delayed_job.log ...
+  file { "/var/log.model/streamcontrol": 
+    ensure => directory, 
+    owner => www-data
+  }
+
 }
