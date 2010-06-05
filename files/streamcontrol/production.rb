@@ -32,7 +32,7 @@ config.after_initialize do
 
   Monitoring.munin_resources_directory = "/var/www/munin/local/"
 
-  Release.latest_url = "http://download.tryphon.eu/streambox/updates/latest.yml"
+  Release.latest_url = "http://download.tryphon.eu/streambox/latest.yml"
   Release.current_url = "/boot/current.yml"
   Release.install_command = "sudo /usr/local/sbin/box-upgrade"
 end
