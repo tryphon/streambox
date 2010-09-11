@@ -3,7 +3,11 @@ require 'rubygems'
 require 'system_builder'
 require 'system_builder/task'
 
-load './local.rb' if File.exists?("./local.rb")
+["#{ENV['HOME']}/.system_builder.rc", "./local.rb"].each do |conf|
+  load conf if File.exists?(conf)
+end
+
+Dir['tasks/**/*.rake'].each { |t| load t }
 
 release_number = Time.now.strftime('%Y%m%d-%H%M')
 release_name = "streambox-#{release_number}"
@@ -24,23 +28,7 @@ SystemBuilder::Task.new(:"streambox-demo") do
   end
 end
 
-desc "Setup your environment to build a streambox image"
-task :setup => "streambox:setup" do
-  if ENV['WORKING_DIR']
-    %w{build dist}.each do |subdir|
-      working_subdir = File.join ENV['WORKING_DIR'], subdir
-      puts "* create and link #{working_subdir}"
-      mkdir_p working_subdir
-      ln_sf working_subdir, subdir
-    end
-  end
-end
-
-task :clean do
-  sh "sudo sh -c \"fuser $PWD/build/root || rm -r build/root\"" if File.exists?("build/root")
-  rm_rf "dist"
-  mkdir_p "dist"
-end
+task :setup => "streambox:setup"
 
 def create_latest_file(latest_file, release_name, release_number)
   checksum = %x{sha256sum dist/upgrade.tar}.split.first
@@ -63,7 +51,10 @@ namespace :buildbot do
   end
 end
 
-task :buildbot => [:clean, "dist:all", "buildbot:dist"]
+task :buildbot => [:clean, "dist:all", "buildbot:dist"] do
+  # clean in dependencies is executed only once
+  Rake::Task["clean"].invoke
+end
 
 namespace :dist do
   desc "Create all distribuable artifacts"
