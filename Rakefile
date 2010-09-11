@@ -44,7 +44,7 @@ end
 namespace :buildbot do
   task :dist do
     mkdir_p target_directory = "#{ENV['HOME']}/dist/streambox"
-    cp "dist/disk", "#{target_directory}/streambox-#{release_number}.disk"
+    sh "gzip --fast --stdout dist/disk > #{target_directory}/streambox-#{release_number}.disk.gz"
     cp "dist/iso", "#{target_directory}/streambox-#{release_number}.iso"
     cp "dist/upgrade.tar", "#{target_directory}/streambox-#{release_number}.tar"
     create_latest_file "#{target_directory}/latest.yml", release_name, release_number
