@@ -8,6 +8,7 @@ config.cache_classes = true
 # config.threadsafe!
 
 # Use a different logger for distributed setups
+require 'syslog_logger'
 config.logger = SyslogLogger.new
 
 # Full error reports are disabled and caching is turned on
