@@ -25,11 +25,18 @@ class darkice::common {
 
 class darkice::full {
   include darkice::common
-  include apt::multimedia
+  # include apt::multimedia
+  include apt::tryphon
   package { darkice-full: 
+    ensure => "1.0-0.0~bpo50+1",
     alias => darkice,
-    require => Apt::Source[debian-multimedia] 
+    require => Apt::Source::Pin[darkice-full]
   }
+  apt::source::pin { [darkice-full, libaacplus1]:
+    source => "tryphon",
+    release => "lenny-backports"
+  }
+
 }
 
 class darkice {
