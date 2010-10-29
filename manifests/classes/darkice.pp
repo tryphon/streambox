@@ -25,7 +25,7 @@ class darkice::common {
 
 class darkice::full {
   include darkice::common
-  # include apt::multimedia
+  include apt::multimedia
   include apt::tryphon
   package { darkice-full: 
     ensure => "1.0-0.0~bpo50+1",
