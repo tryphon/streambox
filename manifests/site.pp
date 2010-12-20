@@ -21,3 +21,4 @@ include users
 include tuner
 include darkice::full
 
+include icecast2
