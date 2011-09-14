@@ -13,26 +13,6 @@ import "classes/*.pp"
 
 # Use tag boot for resources required at boot (network files, etc ..)
 
-file { "/var/etc/network":
-  ensure => directory,
-  tag => boot
-}
-
-file { "/var/etc/network/interfaces":
-  content => template("/etc/puppet/templates/interfaces"),
-  notify => Exec["restart-networking"],
-  tag => boot
-}
-
-file { "/etc/network/interfaces":
-  ensure => "/var/etc/network/interfaces"
-}
-
-exec { "restart-networking": 
-  command => "/sbin/ifdown eth0 && /sbin/ifup eth0",
-  refreshonly => true
-}
-
 file { "/var/lib/streamcontrol/db":
   ensure => directory,
   owner => www-data,
@@ -61,33 +41,6 @@ file { "/var/etc/fm/fm.conf":
 service { fm:
   ensure => running,
   hasrestart => true
-}
-
-file { "/var/etc/darkice/":
-  ensure => directory,
-  tag => boot
-}
-
-file { "/var/etc/darkice/darkice.cfg":
-  content => template("/etc/puppet/templates/darkice.cfg"),
-  notify => Service[darkice],
-  tag => boot
-}
-
-service { darkice:
-  ensure => running,
-  hasrestart => true
-}
-
-exec { "copy-var-model":
-  creates => "/var/log/dmesg",
-  command => "cp -a /var/log.model/* /var/log/",
-  tag => boot
-}
-
-exec { "amixerconf":
-  command => "/usr/local/bin/amixerconf",
-  tag => boot
 }
 
 if $stream_1_server != '' {
