@@ -1,4 +1,11 @@
 class streamcontrol {
+
+  # FIXME troubles with some packages from debian.tryphon.eu lenny-backports
+  file { "/etc/apt/apt.conf.d/80Unauthenticated":
+    content => "APT::Get::AllowUnauthenticated 1;\n",
+    before => Package[libapache2-mod-passenger]
+  }
+
   include apache::passenger
 
   file { "/etc/streamcontrol/database.yml":
