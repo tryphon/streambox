@@ -21,4 +21,6 @@ include users
 include tuner
 include darkice::full
 
+include munin-node::local
+
 include icecast2
