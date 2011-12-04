@@ -65,6 +65,7 @@ GEM
       ffi (~> 0.6.3)
       json_pure
       rubyzip
+    system-builder (0.0.25)
     term-ansicolor (1.0.5)
     xpath (0.1.2)
       nokogiri (~> 1.3)
