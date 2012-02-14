@@ -17,7 +17,7 @@ class streamcontrol {
     require => Package[streamcontrol]
   }
   package { streamcontrol: 
-    ensure => "0.13-1lenny1",
+    ensure => "0.14-1lenny1",
     require => [Apt::Source[tryphon], Package[libapache2-mod-passenger]]
   }
 
