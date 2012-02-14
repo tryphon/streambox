@@ -8,9 +8,8 @@ GIT
 
 GIT
   remote: git://projects.tryphon.eu/system-builder
-  revision: 9fec2612de694a487356ea687d4614580f471fab
+  revision: 6498feb7cdc4706b2da360ebd774dd4d138599bf
   specs:
-    system-builder (0.0.25)
 
 GEM
   remote: http://rubygems.org/
