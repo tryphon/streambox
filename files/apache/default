@@ -7,7 +7,7 @@
   DocumentRoot /usr/share/streamcontrol/public
   PassengerDefaultUser www-data
   PassengerMaxPoolSize 3
-  PassengerMaxRequests 10000
+  PassengerMaxRequests 1000
   PassengerLogLevel 3
   <Directory /usr/share/streamcontrol/public>
      AllowOverride None
