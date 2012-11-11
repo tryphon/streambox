@@ -6,7 +6,6 @@ import "box"
 
 $source_base="/tmp/puppet"
 
-$box_name="streambox"
 include box
 
 $amixerconf_mode="capture"
