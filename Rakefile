@@ -6,6 +6,10 @@ require 'system_builder'
 require 'system_builder/box_tasks'
 
 SystemBuilder::BoxTasks.new(:streambox) do |box|
+  box.boot do |boot|
+    boot.version = :squeeze
+  end
+
   box.disk_image do |image|
     image.size = 500.megabytes
   end
