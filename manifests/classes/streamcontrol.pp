@@ -8,6 +8,8 @@ class streamcontrol {
 
   include apache::passenger
 
+  include ruby::bundler
+
   file { "/etc/streamcontrol/database.yml":
     source => "$source_base/files/streamcontrol/database.yml",
     require => Package[streamcontrol]
@@ -17,7 +19,7 @@ class streamcontrol {
     require => Package[streamcontrol]
   }
   package { streamcontrol: 
-    ensure => "0.14-1lenny1",
+    ensure => "0.14-2",
     require => [Apt::Source[tryphon], Package[libapache2-mod-passenger]]
   }
 
