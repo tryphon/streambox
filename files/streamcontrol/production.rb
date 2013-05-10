@@ -8,8 +8,8 @@ config.cache_classes = true
 # config.threadsafe!
 
 # Use a different logger for distributed setups
-require 'syslog_logger'
-config.logger = SyslogLogger.new
+require 'syslog/logger'
+config.logger = Syslog::Logger.new
 
 # Full error reports are disabled and caching is turned on
 config.action_controller.consider_all_requests_local = false
@@ -33,7 +33,7 @@ config.after_initialize do
 
   Monitoring.munin_resources_directory = "/var/www/munin/local/"
 
-  Release.latest_url = "http://download.tryphon.eu/streambox/latest.yml"
-  Release.current_url = "/boot/current.yml"
-  Release.install_command = "sudo /usr/local/sbin/box-upgrade"
+  # FIXME see #784
+  require 'box'
+  Box::CLI::Root.new.setup Box::CLI::Root.setup_file
 end
