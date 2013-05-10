@@ -36,4 +36,6 @@ config.after_initialize do
   # FIXME see #784
   require 'box'
   Box::CLI::Root.new.setup Box::CLI::Root.setup_file
+
+  Box::Release.install_command = "sudo /usr/local/sbin/box-upgrade"
 end
