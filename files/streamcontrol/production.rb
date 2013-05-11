@@ -9,7 +9,10 @@ config.cache_classes = true
 
 # Use a different logger for distributed setups
 require 'syslog/logger'
-config.logger = Syslog::Logger.new
+config.logger = Syslog::Logger.new("rails/streamcontrol").tap do |syslog|
+  syslog.level = Logger::INFO
+end
+
 
 # Full error reports are disabled and caching is turned on
 config.action_controller.consider_all_requests_local = false
