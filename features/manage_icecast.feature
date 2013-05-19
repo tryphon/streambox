@@ -3,10 +3,10 @@ Feature: Manage Icecast
   An user
   wants to manage icecast
 
-  # Scenario: Disable without a source password
-  #   When I am on /icecast
-  #   Then I should see "undefined"        
-  #   And Icecast should not respond on "http://streambox.local:8000"
+  Scenario: Disable without a source password
+    When I am on /icecast
+    Then I should see "undefined"        
+    And Icecast should not respond on "http://streambox.local:8000"
 
   Scenario: Define a source password
     Given I am on /icecast/edit

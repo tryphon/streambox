@@ -1,5 +1,3 @@
-Dir[File.join(File.dirname(__FILE__), "tasks", "*.rake")].each { |t| load t }
-
 require 'rubygems'
 
 require 'system_builder'
