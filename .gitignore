@@ -3,3 +3,5 @@ build
 *~
 local.rb
 puppet.log
+log/*
+tmp/*
