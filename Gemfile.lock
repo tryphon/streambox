@@ -8,21 +8,18 @@ GIT
 
 GIT
   remote: git://projects.tryphon.priv/system-builder
-  revision: ffd2443428cccd00feac654496ac22c6f84016b1
-  specs:
-
-GIT
-  remote: git://projects.tryphon.priv/vmbox
-  revision: b98eac3bd89f2fc71adb91b2ba763cda621c81e1
-  specs:
-    tryphon-vmbox (0.0.1)
-      qemu
-
-PATH
-  remote: ~/Projects/SystemBuilder
+  revision: 8998112436019091a3e74f82ca0b46f508101280
   specs:
     system-builder (0.0.26)
       tryphon-vmbox
+
+GIT
+  remote: git://projects.tryphon.priv/vmbox
+  revision: c42d8f45ac82eeefd9c13c518478960ff23d16a8
+  specs:
+    tryphon-vmbox (0.0.1)
+      json
+      qemu
 
 GEM
   remote: https://rubygems.org/
