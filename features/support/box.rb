@@ -1,5 +1,9 @@
 require 'vmbox'
 
+def current_box
+  @current_box = VMBox.new("streambox")
+end
+
 After do
-  VMBox.new("streambox").rollback
+  current_box.rollback
 end

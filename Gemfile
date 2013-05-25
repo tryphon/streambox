@@ -10,4 +10,5 @@ group :cucumber do
   gem "rspec"
 end
 
-gem "tryphon-vmbox", :git => "git://projects.tryphon.priv/vmbox"
+gem "tryphon-vmbox", :git => "git://projects.tryphon.priv/vmbox" #, :path => "~/Projects/VMBox"
+gem "net-ssh"
