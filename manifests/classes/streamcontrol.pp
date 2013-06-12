@@ -18,8 +18,8 @@ class streamcontrol {
     source => "$source_base/files/streamcontrol/production.rb",
     require => Package[streamcontrol]
   }
-  package { streamcontrol: 
-    ensure => "0.15-1",
+  package { streamcontrol:
+    ensure => "0.15-2",
     require => [Apt::Source[tryphon], Package[libapache2-mod-passenger]]
   }
 
@@ -27,8 +27,8 @@ class streamcontrol {
   readonly::mount_tmpfs { "/var/lib/streamcontrol": }
 
   # Required for delayed_job.log ...
-  file { "/var/log.model/streamcontrol": 
-    ensure => directory, 
+  file { "/var/log.model/streamcontrol":
+    ensure => directory,
     owner => www-data
   }
 
