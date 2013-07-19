@@ -23,8 +23,11 @@ class streamcontrol {
     require => [Apt::Source[tryphon], Package[libapache2-mod-passenger]]
   }
 
-  # Not used for the moment
   readonly::mount_tmpfs { "/var/lib/streamcontrol": }
+
+  file { "/etc/puppet/manifests/classes/streamcontrol.pp":
+    source => "puppet:///files/streamcontrol/manifest.pp"
+  }
 
   # Required for delayed_job.log ...
   file { "/var/log.model/streamcontrol":
