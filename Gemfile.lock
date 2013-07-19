@@ -8,17 +8,17 @@ GIT
 
 GIT
   remote: git://projects.tryphon.priv/system-builder
-  revision: 48f633bd583d92568d6ac34cbe3a848df8d6ec0d
+  revision: 5cccc3a5e1cc9efe6b30e7869c99043e0a1c16b5
   specs:
     system-builder (0.0.26)
       tryphon-vmbox
 
 GIT
   remote: git://projects.tryphon.priv/vmbox
-  revision: 9ed21c6fb3a84eae6359508734e77abd931ddb9c
+  revision: 3a5d75072aa7916b9b2262163f0f9a2ea14553f9
   specs:
     tryphon-vmbox (0.0.1)
-      activesupport
+      activesupport (~> 3.2.1)
       json
       qemu
 
