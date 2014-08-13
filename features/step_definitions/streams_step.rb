@@ -7,8 +7,8 @@ def stream_content_type(url)
       http.request_get(url.path) do |response|
         content_type = response['content-type']
         raise StreamNoDownload
-      end 
-    rescue StreamNoDownload => e 
+      end
+    rescue StreamNoDownload => e
       #
     end
   end
@@ -16,12 +16,11 @@ def stream_content_type(url)
 end
 
 Then /^an? ([^ ]*) stream should respond on "([^\"]*)"$/ do |type, url|
-  expected_content_type = 
-    case type
-    when "ogg": "application/ogg"
-    when "mp3": "audio/mpeg"
-    when "aac": "audio/aac"
-    end
+  expected_content_type = {
+    "ogg" =>  "application/ogg",
+    "mp3" => "audio/mpeg",
+    "aac" => "audio/aac",
+  }[type]
 
   content_type = stream_content_type(URI.parse(url))
   retry_count = 3
