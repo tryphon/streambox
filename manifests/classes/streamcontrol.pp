@@ -7,8 +7,8 @@ class streamcontrol {
   }
 
   include apache::passenger
-
   include ruby::bundler
+  include apt::tryphon::dev
 
   file { "/etc/streamcontrol/database.yml":
     source => "$source_base/files/streamcontrol/database.yml",
@@ -19,8 +19,8 @@ class streamcontrol {
     require => Package[streamcontrol]
   }
   package { streamcontrol:
-    ensure => "0.15-2",
-    require => [Apt::Source[tryphon], Package[libapache2-mod-passenger]]
+    ensure => "0.17-1+build31",
+    require => [Apt::Source[tryphon-dev], Package[libapache2-mod-passenger]]
   }
 
   readonly::mount_tmpfs { "/var/lib/streamcontrol": }
