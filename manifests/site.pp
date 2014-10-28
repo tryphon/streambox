@@ -19,6 +19,7 @@ $darkice_user="stream"
 include users
 include tuner
 include darkice::full
+include go-broadcast
 
 include munin-node::local
 
