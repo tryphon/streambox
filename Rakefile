@@ -13,4 +13,4 @@ SystemBuilder::BoxTasks.new(:streambox) do |box|
 end
 
 desc "Run continuous integration tasks (spec, ...)"
-task :ci => "streambox:buildbot"
+task :ci => "streambox:ci"
