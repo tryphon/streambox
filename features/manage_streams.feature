@@ -44,15 +44,15 @@ Feature: Manage streams
     And I press "Add"
     Then a aac stream should respond on "http://streambox.local:8000/test.aac"
 
-  Scenario: Create a local AAC+ stream
+  Scenario: Create a local HE-AAC v2 stream
     Given I am on /streams/new
     When I fill in the following:
-    | Name        | AAC+ test |
+    | Name        | HE-AAC v2 test |
     | Server      | localhost |
     | Port        | 8000      |
     | Mount point | test.aac  |
     | Password    | dummy     |
-    And I choose "AAC+"
+    And I choose "HE-AAC v2"
     And I press "Add"
     Then a aac stream should respond on "http://streambox.local:8000/test.aac"
 
