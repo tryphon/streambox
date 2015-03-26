@@ -1,0 +1,2 @@
+DAEMON_OPTS="httpSource --alsa-device=<%= scope.lookupvar('alsa::device') %> --http-bind=:9000 --config=/etc/go-broadcast/config.json --log-syslog"
+DAEMON_USER="boxdaemon"

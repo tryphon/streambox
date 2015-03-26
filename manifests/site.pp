@@ -18,8 +18,7 @@ include streamcontrol
 $darkice_user="stream"
 include users
 include tuner
-include darkice::full
-include go-broadcast
+include go-broadcast::local
 
 include munin-node::local
 
