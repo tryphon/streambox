@@ -76,26 +76,6 @@ Feature: Manage streams
     |       5 |
     |      10 |
 
-  Scenario Outline: Select MP3 VBR quality
-    Given I am on /streams/new
-    When I fill in the following:
-    | Name           | MP3 test  |
-    | Server         | localhost |
-    | Port           | 8000      |
-    | Mount point    | test.mp3  |
-    | Password       | dummy     |
-    | Format (radio) | MP3       |
-    | Mode (radio)   | VBR       |
-    And I select "<Quality>" from "Quality"
-    And I press "Add"
-    Then a mp3 stream should respond on "http://streambox.local:8000/test.mp3"
-
-    Examples:
-    | Quality |
-    |       1 |
-    |       5 |
-    |      10 |
-
   Scenario Outline: Select Ogg/Vorbis VBR quality
     Given I am on /streams/new
     When I fill in the following:
