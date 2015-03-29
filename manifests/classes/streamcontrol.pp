@@ -19,7 +19,7 @@ class streamcontrol {
     require => Package[streamcontrol]
   }
   package { streamcontrol:
-    ensure => "0.17-1+build43",
+    ensure => "0.17-1+build47",
     require => [Apt::Source[tryphon-dev], Package[libapache2-mod-passenger]]
   }
 
