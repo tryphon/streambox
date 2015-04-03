@@ -124,3 +124,28 @@ Feature: Manage streams
     |     224 |
     |     256 |
     |     320 |
+
+  Scenario: Migration streams to GoBroadcast
+    Given the box configuration contains:
+    | stream_1_id          | 1         |
+    | stream_1_server_type | icecast2  |
+    | stream_1_server      | localhost |
+    | stream_1_port        | 8000      |
+    | stream_1_password    | dummy     |
+    | stream_1_mount_point | test.ogg  |
+    | stream_1_format      | vorbis    |
+    | stream_1_mode        | vbr       |
+    | stream_1_quality     | 4         |
+    | stream_2_id          | 1         |
+    | stream_2_server_type | icecast2  |
+    | stream_2_server      | localhost |
+    | stream_2_port        | 8000      |
+    | stream_2_password    | dummy     |
+    | stream_2_mount_point | test.mp3  |
+    | stream_2_format      | mp3       |
+    | stream_2_bitrate     | 128       |
+    | stream_2_mode        | cbr       |
+    And the box configuration is saved
+    When the box reboots
+    Then a ogg stream should respond on "http://streambox.local:8000/test.ogg"
+    And a mp3 stream should respond on "http://streambox.local:8000/test.mp3"
