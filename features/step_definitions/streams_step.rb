@@ -21,7 +21,8 @@ Then /^an? ([^ ]*) stream should respond on "([^\"]*)"$/ do |type, url|
   expected_content_type = {
     "ogg" =>  "application/ogg",
     "mp3" => "audio/mpeg",
-    "aac" => "audio/aacp",
+    "aac" => "audio/aac",
+    "aacp" => "audio/aacp",
   }[type]
 
   content_type = stream_content_type(URI.parse(url))

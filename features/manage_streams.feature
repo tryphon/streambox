@@ -54,7 +54,7 @@ Feature: Manage streams
     | Password    | dummy     |
     And I choose "HE-AAC v2"
     And I press "Add"
-    Then a aac stream should respond on "http://streambox.local:8000/test.aac"
+    Then a aacp stream should respond on "http://streambox.local:8000/test.aac"
 
   Scenario Outline: Select MP3 VBR quality
     Given I am on /streams/new
